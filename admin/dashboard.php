@@ -56,44 +56,7 @@ if(!isset($_SESSION['id'])){
         </div>
         <div class="col-sm-9" style="padding: 0%;">
             <div class="admin">ADMIN DASHBOARD</div>
-            <!-- <div class="col-sm-12" style="margin-top: 1rem;">
-                <div class="col-sm-3">
-                    <div class="box1">
-                        <div class="uni">TOTAL UNIVERSITY</div>
-                        <div class="icon1">
-                            <i class="fas fa-school"></i>
-                        </div>
-                        <div class="no">5+</div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="box1">
-                        <div class="uni">TOTAL TEACHER</div>
-                        <div class="icon1">
-                            <i class="fas fa-chalkboard-teacher"></i>
-                        </div>
-                        <div class="no">5+</div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="box1">
-                        <div class="uni">TOTAL CLASS</div>
-                        <div class="icon1">
-                            <i class="fas fa-users-class"></i>
-                        </div>
-                        <div class="no">5+</div>
-                    </div>
-                </div>
-                <div class="col-sm-3">
-                    <div class="box1">
-                        <div class="uni">TOTAL STUDENT</div>
-                        <div class="icon1">
-                            <i class='fas fa-book-reader'></i>
-                        </div>
-                        <div class="no">5+</div>
-                    </div>
-                </div> 
-            </div>-->
+            
             <div class="col-sm-12">
                 <div class="col-sm-2"></div>
             <div class="col-sm-8">
