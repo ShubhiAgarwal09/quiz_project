@@ -1,3 +1,14 @@
+<?php
+/*session_start();
+if(!isset($_SESSION['id'])){
+    echo "Login with your username and password";
+    header('location:../mainlogin.html');
+}else{
+
+    header('location:dashboard.php');
+}*/
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +39,7 @@
             <div class="navbar">
                 <ul>
                     <div class="icon">
-                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <i class="fas fa-user-shield" aria-hidden="true"></i>
                     </div>
                     <li style="color: black; font-weight: bold; ">
                         <div class="dash">DASHBOARD</div>
@@ -209,8 +220,8 @@
                 id:i
             },
             success: function(data) {
-                if (data == 0) {
                     alert (data);
+                if (data == 0) {
                     alert('Deleted university successfully');
                     window.location = "dashboard.php";
                     }

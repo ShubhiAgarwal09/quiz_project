@@ -28,7 +28,7 @@
             <div class="navbar">
                 <ul>
                     <div class="icon">
-                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <i class="fas fa-user-shield" aria-hidden="true"></i>
                     </div>
                     <li style="color: black; font-weight: bold; ">
                         <div class="dash">DASHBOARD</div>
@@ -48,64 +48,47 @@
             <div class="col-sm-12">
                 <div class="col-sm-2"></div>
             <div class="col-sm-8">
-            <!--<form>
-                <div class="form1 show" id="form1">
-                    <label for="uname" style="font-weight: bold;">ADD UNIVERSITY</label><br>
-                    <input type="text" placeholder="University Name" id="uname" class="form-control" name="uname">
-                    <br>
-                    <div style="text-align: center;">
-                        
-                         <button class="button1" onclick="adduni()">SUBMIT NOW</button> 
-                    </div>
-                </div>
-            </form>
-            <form>
-                <div class="form2 show" id="form2" >
-                    <label for="class">ADD CLASS</label><br>
-                    <input type="text" placeholder="Class Name goes here" class="form-control" name="class1"
-                        id="class1"><br>
+            <form style="margin-left = 5em">
+                <div class="form3 show" id="form3">
+                    <label for="tname">ADD TEACHER</label><br>
+                    <input type="text" placeholder="Teacher Name" class="form-control" name="tname"
+                        id="tname"><br>
+                    <label for="email">ADD EMAIL</label><br>
+                    <input type="email" placeholder="Email Address" class="form-control" name="email"
+                        id="email"><br>
                     <div class="form-group">
                         <label for="uni">CHOOSE UNIVERSITY</label><br>
                         <!-- <input type="text" class="form-control" placeholder="Enter Password" name="class"
                         id="class"><br> 
                         <div class="contain-input">
-                            <div class="list3" id="list3" style="width: 100%; float: left;"></div>
-                        </div>
-                    </div>
-                    <div style="text-align: center;">
-                        <button style="margin-top: 2rem;" class="btn1" onclick="addclass()">SUBMIT</button>
-                    </div>
-                </div>
-            </form>-->
-            <form>
-                <div class="form3 show" id="form3">
-                    <label for="tname">ADD TEACHER</label><br>
-                    <input type="text" placeholder="Enter Teacher" class="form-control" name="tname"
-                        id="tname"><br>
-                    <div class="form-group">
-                        <label for="uni">CHOOSE UNIVERSITY</label><br>
-                        <!-- <input type="text" class="form-control" placeholder="Enter Password" name="class"
-                        id="class"><br> -->
-                        <div class="contain-input">
                             <div class="list2" id="list2" style="width: 100%; float: left;"></div>
-                        </div>
+                        </div>-->
+                        <select name="university1" id="university1" class="form-control" onchange="getclass();">
+                            <option value="0">SELECT UNIVERSITY</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="tclass" style="margin-top: 2rem;">CHOOSE CLASS</label><br>
                         <!-- <input type="text" class="form-control" placeholder="Enter Password" name="class"
-                        id="class"><br> -->
+                        id="class"><br> 
                         <div class="contain-input">
                             <div class="list1" id="list1" style="width: 100%; float: left;"></div>
-                        </div>
+                        </div>-->
+                        <select name="classs" id="classs" class="form-control">
+                            <option value="0">SELECT CLASS</option>
+                        </select>
                     </div>
 
                     <div style="text-align: center;">
-                        <button class="btn1" onclick="addteacher();" style="margin-top: 2rem;">SUBMIT</button>
+                        <button class="button1" onclick="addteacher();" style="margin-top: 2rem;">SUBMIT</button>
                     </div>
                 </div>
             </form> 
         </div>
-        <div class="col-sm-2" ></div>
+        <div class="col-sm-2" ><button class="showalluni" onclick="showtable()" style="color: rgb(0, 0, 0);
+    background-color: royalblue;
+    border-radius: 0.5rem;font-weight: bolder;
+    padding: 0.5rem;" >ALL TEACHERS LIST</button></div>
         <div class="box-footer">
             <div class="tabledesign">
                 <div class="listclass" id="listclass"></div>
@@ -138,7 +121,7 @@
             success: function(data) {
                 if (data == 0) {
                     alert('teacher added successfully');
-                    window.location = "dashboard.php";
+                    window.location = "addteacher.php";
                 }
             }
         });
@@ -158,7 +141,7 @@ function getuni() {
             token: token
         },
         success: function(data) {
-            // $('#list').html(data);
+            //$('#list').html(data);
             $('#university1').html(data);
         }
     });
@@ -208,7 +191,7 @@ function deleted(i){
         success: function(data) {
             if (data == 0) {
                 alert('teacher deleted successfully');
-                window.location = "dashboard.php";
+                window.location = "addteacher.php";
                 }
         }
     });
@@ -221,3 +204,5 @@ function deleted(i){
     });
     </script>
 </html>
+
+

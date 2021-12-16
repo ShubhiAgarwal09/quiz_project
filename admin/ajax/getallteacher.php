@@ -5,7 +5,7 @@ if(isset($_POST['token']) && password_verify("getteacher",$_POST['token']))
 {
        
         $query=$db->prepare('SELECT * FROM addteacher JOIN addclass ON addteacher.class=addclass.id
-         JOIN adduniversity ON addclass.id=adduniversity.id;');
+         JOIN adduniversity ON addclass.uid=adduniversity.uid;');
 
         $data=array();
 

@@ -28,7 +28,7 @@
             <div class="navbar">
                 <ul>
                     <div class="icon">
-                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <i class="fas fa-user-shield" aria-hidden="true"></i>
                     </div>
                     <li style="color: black; font-weight: bold; ">
                         <div class="dash">DASHBOARD</div>
@@ -48,17 +48,6 @@
             <div class="col-sm-12">
                 <div class="col-sm-2"></div>
             <div class="col-sm-8">
-            <!--<form>
-                <div class="form1 show" id="form1">
-                    <label for="uname" style="font-weight: bold;">ADD UNIVERSITY</label><br>
-                    <input type="text" placeholder="University Name" id="uname" class="form-control" name="uname">
-                    <br>
-                    <div style="text-align: center;">
-                        
-                         <button class="button1" onclick="adduni()">SUBMIT NOW</button> 
-                    </div>
-                </div>
-            </form>-->
             <form>
                 <div class="form2 show" id="form2" >
                     <label for="class">ADD CLASS</label><br>
@@ -77,33 +66,6 @@
                     </div>
                 </div>
             </form>
-            <!--<form>
-                <div class="form3 hidden" id="form3">
-                    <label for="tname">ADD TEACHER</label><br>
-                    <input type="text" placeholder="Enter Teacher" class="form-control" name="tname"
-                        id="tname"><br>
-                    <div class="form-group">
-                        <label for="uni">CHOOSE UNIVERSITY</label><br>
-                        <!-- <input type="text" class="form-control" placeholder="Enter Password" name="class"
-                        id="class"><br> 
-                        <div class="contain-input">
-                            <div class="list2" id="list2" style="width: 100%; float: left;"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="tclass" style="margin-top: 2rem;">CHOOSE CLASS</label><br>
-                        <!-- <input type="text" class="form-control" placeholder="Enter Password" name="class"
-                        id="class"><br> 
-                        <div class="contain-input">
-                            <div class="list1" id="list1" style="width: 100%; float: left;"></div>
-                        </div>
-                    </div>
-
-                    <div style="text-align: center;">
-                        <button class="btn1" onclick="addteacher();" style="margin-top: 2rem;">SUBMIT</button>
-                    </div>
-                </div>
-            </form> -->
         </div>
         <div class="col-sm-2" ><button class="showalluni" onclick="showclass()" style="color: rgb(0, 0, 0);
     background-color: royalblue;
@@ -125,7 +87,7 @@
 <script type="text/javascript">
     function addclass() {
         var class1 = document.getElementById('class1').value;
-        var id = document.getElementById('university').value;
+        var uid = document.getElementById('university').value;
         var token = "<?php echo password_hash("classtoken", PASSWORD_DEFAULT); ?>"
         if (class1 !== "") {
             $.ajax({
@@ -133,7 +95,7 @@
                 url: "ajax/addclass.php",
                 data: {
                     class1: class1,
-                    id: id,
+                    uid: uid,
                     token: token
                 },
                 success: function(data) {
@@ -191,6 +153,7 @@ function deleted(i){
             id:i
         },
         success: function(data) {
+            alert (data);
             if (data == 0) {
                 alert('class deleted successfully');
                 window.location = "addclass.php";

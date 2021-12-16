@@ -3,11 +3,11 @@ include('connection1.php');
 session_start();
 if(isset($_POST['token']) && password_verify("getclass",$_POST['token']))
 {
-        $id =$_POST['id'];
+        $uid =$_POST['uid'];
 
         $query=$db->prepare('SELECT * FROM addclass WHERE uid = ?');
 
-        $data=array($id);
+        $data=array($uid);
 
         $execute=$query->execute($data);
 ?>

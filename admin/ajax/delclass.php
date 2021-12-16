@@ -5,7 +5,7 @@ if(isset($_POST['token']) && password_verify("deletetoken",$_POST['token']))
 {
     $id=test_input($_POST['id']);
     
-        $query=$db->prepare("DELETE FROM `addclass` WHERE id=?");
+        $query=$db->prepare("DELETE FROM addclass WHERE id=?");
         $data=array($id);
         $execute=$query->execute($data);
         if($execute)
