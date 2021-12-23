@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(!isset($_SESSION['id'])){
+    echo "Login with your username and password";
+    header('location:../mainlogin.html');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +32,9 @@
         <div class="row">
         <div class="col-sm-3" style="padding: 0%;">
             <div class="navbar">
+                
                 <ul>
+                <div style="font-weight: bolder;color: black;font-size: 1.5rem;">&nbsp;WELCOME&nbsp; <?php echo $_SESSION['name']; ?></div>
                     <div class="icon">
                         <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
                     </div>
@@ -33,7 +42,7 @@
                         <div class="dash">DASHBOARD</div>
                     </li>
                     <li><a href="dashboard.php" id ="button1">ADD STUDENT</a></li>
-                    <li><a href="#" id = "button2">ADD TEST</a></li>
+                    <li><a href="addtest.php" id = "button2">ADD TEST</a></li>
                     <li><a href="#" id = "button3">CREATE TEST</a></li>
                     
                     <li>
@@ -48,30 +57,16 @@
             <div class="col-sm-12">
                 <div class="col-sm-2"></div>
             <div class="col-sm-8">
-            <form>
-                <!--<div class="form1 show" id="form1">
-                    <label for="uname" style="font-weight: bold;">ADD UNIVERSITY</label><br>
-                    <input type="text" placeholder="University Name" id="uname" class="form-control" name="uname">
-                    <br>
-                    <div style="text-align: center;">
-                        
-                         <button class="button1" onclick="adduni()">SUBMIT NOW</button> 
-                    </div>
-                </div>-->
-                <div class="form1 show" id="form1">
-                    <label for="fclass">CHOOSE FILE</label><br>
-                    <input type="file" name="excel" id="excel">
-                    <div style="text-align: center;">
-                        
-                         <button class="button1" onclick="addstudent()">SUBMIT NOW</button> 
-                    </div>
-                </div>
-            </form>
+            <form class="form1 " id="excelform">
+			<div class="">
+                <label for="name">CHOOSE FILE</label><br>
+				<input type="file" name="excel_file" id="excel_file">
+			</div>
+			<div class="" style="text-align: center;">
+				<input type="submit" name="submit" id="submit" class="button1" onclick="sendfile();">
+			</div>
+		</form>
         </div>
-        <!--<div class="col-sm-2" ><button class="showalluni" onclick="showuni()" style="color: rgb(0, 0, 0);
-    background-color: royalblue;
-    border-radius: 0.5rem;font-weight: bolder;
-    padding: 0.5rem;" >LIST OF ALL UNIVERSITY</button></div>-->
         <div class="box-footer">
             <div class="tabledesign">
                 <div class="listclass" id="listclass"></div>
@@ -86,46 +81,27 @@
     </div>
 </body>
 <script>
-function addstudent() {
-        var excelform = document.getElementById('excelform');
-        var data = new FormData(excelform);
-        // var class1 = document.getElementById('classs').value;
-        var token = "<?php echo password_hash("studenttoken", PASSWORD_DEFAULT); ?>"
-            $.ajax({
-                type: 'POST',
-                url: "ajax/exceldata.php",
-                    contentType:false,
-                    processData:false,
-                    data: data,
-                success: function(data) {
-                    if (data == 0) {
-                        alert('student added successfully');
-                        window.location.reload();
-                    }
-                }
-            });
+ 
 
-    }
+    function sendfile()
+		{
+			var excelform = document.getElementById('excelform');
+			var data = new FormData(excelform);
+			// var token='<?php echo password_hash("hello", PASSWORD_DEFAULT);?>';
+			$.ajax(
+			{
+				type:'POST',
+				url:"ajax/excel.php",
+			    data:data,
+			    processData:false,
+				contentType:false,
+				success:function(data)
+				{
+					alert(data);
+				}
+			});
+		}
 
-    getclass();
-
-    function getclass() {
-        var classId = <?php echo $_SESSION['class']; ?>;
-        var token = "<?php echo password_hash("getclass", PASSWORD_DEFAULT); ?>";
-        $.ajax({
-            type: 'POST',
-            url: "ajax/getclass.php",
-            data: {
-                // uid: uid,
-                cid: classId,
-                token: token
-            },
-            success: function(data) {
-                // alert(data)
-                $('#classs').html(data);
-            }
-        });
-    }
 </script>
 <script type=text/javascript>
     $('form').submit(function(e) {

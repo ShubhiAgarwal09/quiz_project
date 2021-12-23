@@ -1,12 +1,8 @@
 <?php
-/*session_start();
-if(!isset($_SESSION['id'])){
-    echo "Login with your username and password";
+session_start();
+if(!isset($_SESSION['email'])){
     header('location:../mainlogin.html');
-}else{
-
-    header('location:dashboard.php');
-}*/
+}
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +34,7 @@ if(!isset($_SESSION['id'])){
         <div class="col-sm-3" style="padding: 0%;">
             <div class="navbar">
                 <ul>
+                <div  style="font-weight: bolder;color: black;font-size: 1.5rem;">WELCOME&nbsp; <?php echo $_SESSION['email']; ?></div>
                     <div class="icon">
                         <i class="fas fa-user-shield" aria-hidden="true"></i>
                     </div>
@@ -71,51 +68,6 @@ if(!isset($_SESSION['id'])){
                     </div>
                 </div>
             </form>
-            <!-- <form>
-                <div class="form2 hidden" id="form2">
-                    <label for="class">ADD CLASS</label><br>
-                    <input type="text" placeholder="Class Name goes here" class="form-control" name="class1"
-                        id="class1"><br>
-                    <div class="form-group">
-                        <label for="uni">CHOOSE UNIVERSITY</label><br>
-                        <!-- <input type="text" class="form-control" placeholder="Enter Password" name="class"
-                        id="class"><br> 
-                        <div class="contain-input">
-                            <div class="list3" id="list3" style="width: 100%; float: left;"></div>
-                        </div>
-                    </div>
-                    <div style="text-align: center;">
-                        <button style="margin-top: 2rem;" class="btn1" onclick="addclass()">SUBMIT</button>
-                    </div>
-                </div>
-            </form>
-            <form>
-                <div class="form3 hidden" id="form3">
-                    <label for="tname">ADD TEACHER</label><br>
-                    <input type="text" placeholder="Enter Teacher" class="form-control" name="tname"
-                        id="tname"><br>
-                    <div class="form-group">
-                        <label for="uni">CHOOSE UNIVERSITY</label><br>
-                        <!-- <input type="text" class="form-control" placeholder="Enter Password" name="class"
-                        id="class"><br> 
-                        <div class="contain-input">
-                            <div class="list2" id="list2" style="width: 100%; float: left;"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="tclass" style="margin-top: 2rem;">CHOOSE CLASS</label><br>
-                        <!-- <input type="text" class="form-control" placeholder="Enter Password" name="class"
-                        id="class"><br> 
-                        <div class="contain-input">
-                            <div class="list1" id="list1" style="width: 100%; float: left;"></div>
-                        </div>
-                    </div>
-
-                    <div style="text-align: center;">
-                        <button class="btn1" onclick="addteacher();" style="margin-top: 2rem;">SUBMIT</button>
-                    </div>
-                </div>
-            </form> -->
         </div>
         <div class="col-sm-2" ><button class="showalluni" onclick="showuni()" style="color: rgb(0, 0, 0);
     background-color: royalblue;

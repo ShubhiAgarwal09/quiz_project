@@ -10,7 +10,7 @@ if(isset($_POST['token']) && password_verify("teachertoken",$_POST['token']))
     if($tname!="")
     {
 
-        $password1_hash=password_hash(substr($tname,0,4). "9876", PASSWORD_DEFAULT);
+        $password1_hash=password_hash(substr($tname,0,4)."9876", PASSWORD_DEFAULT);
         $query=$db->prepare("INSERT INTO addteacher(tname,email,password,class) VALUES (?,?,?,?)");
         $data=array($tname,$email,$password1_hash,$class);
         $execute=$query->execute($data);

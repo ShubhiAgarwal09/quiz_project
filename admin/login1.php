@@ -9,7 +9,7 @@ if(isset($_POST['but_submit'])){
 
 
     if ($email != "" && $password != ""){
-
+        $_SESSION['loggedin']=true;
         $sql_query = "select count(*) as cntUser from adminlogin where email='".$email."' and password='".$password."'";
         $result = mysqli_query($con,$sql_query);
         $row = mysqli_fetch_array($result);
@@ -74,7 +74,7 @@ if(isset($_POST['but_submit'])){
                 <div class="col-sm-4">
                 </div>
                 <div class="col-sm-3">
-                    <br><br><br><br><br><br>
+                    <br><br><br><br>
                     <i class="fas fa-user-shield" style="font-size: 5rem;text-align: center; "></i>
                     <span style="font-weight: bolder; font-size: 1.5rem;"> ADMIN LOGIN</span>
                     <br><br>
