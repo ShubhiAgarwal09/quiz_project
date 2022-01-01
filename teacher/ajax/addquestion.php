@@ -2,8 +2,7 @@
 include("Classes/PHPExcel.php");
 include("connection.php");
 
-//$class = $_POST['classs'];
-
+$test= $_POST['test'];
 if(!empty($_FILES["excel_file"]))
 {
 	$file_array = explode(".", $_FILES["excel_file"]["name"]);
@@ -24,8 +23,8 @@ if(!empty($_FILES["excel_file"]))
 				$option3 = $worksheet->getCellByColumnAndRow(3,$row)->getValue();
                 $option4 = $worksheet->getCellByColumnAndRow(4,$row)->getValue();
                 $answer = $worksheet->getCellByColumnAndRow(5,$row)->getValue();
-				// $query = $db->prepare('INSERT INTO addstudent(fname,lname,email,stuid,password) VALUES (?,?,?,?,?)');
-				// $data = array($fname,$lname,$email,$stuid,$password1);
+				$query = $db->prepare('INSERT INTO addquestion(test,question,option1,option2,option3,option4,answer) VALUES (?,?,?,?,?,?,?)');
+				$data = array($test,$question,$option1,$option2,$option3,$option4,$answer);
 				$execute=$query->execute($data);
 				if($execute){
 					echo 0;

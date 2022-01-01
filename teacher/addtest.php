@@ -39,7 +39,7 @@ session_start();
                     </li>
                     <li><a href="dashboard.php" id ="button1">ADD STUDENT</a></li>
                     <li><a href="addtest.php" id = "button2">ADD TEST</a></li>
-                    <li><a href="#" id = "button3">CREATE TEST</a></li>
+                    <li><a href="addquestion.php" id = "button3">CREATE TEST</a></li>
                     
                     <li>
                         <button class="button5"><a href="logout.php">LOGOUT</a></button>
@@ -54,23 +54,40 @@ session_start();
                 <div class="col-sm-2"></div>
             <div class="col-sm-8">
             <form class="form1 show" >
-			<!-- <div class="">
-                <label for="name">CHOOSE FILE</label><br>
-				<input type="file" name="excel_file" id="excel_file">
-			</div>
-			<div class="" style="text-align: center;">
-				<input type="submit" name="submit" id="submit" class="button1" onclick="sendfile();">
-			</div> -->
             <div class="form-group">
                 <label for="name">TEST NAME:</label><br>
                 <input type="text" name="test" id="test" placeholder="Eg:DBMS SET-1" class="form-control">
 
             </div>
-            <div class="form-group">
-                <label for="tclass">CHOOSE CLASS</label><br>
+             <!-- <div class="form-group">
+                <label for="tclass">TEST CLASS</label><br>
                     <select name="classs" id="classs" class="form-control">
                         <option value="0">SELECT CLASS</option>
                     </select>
+            </div>  -->
+            <div class="form-group">
+                <label for="tdate">SCHEDULE DATE</label><br>
+                <input type="date" name="date" id="date" class="form-control" placeholder="Schedule test date">
+            </div>
+            <div class="form-group">
+                <label for="thour">TEST DURATION</label><br>
+                <input type="number" name="thour" id="thour" placeholder="Test Duration(in hours)" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="tques">TOTAL QUESTIONS</label><br>
+                <input type="number" name="tques" id="tques" placeholder="Number of Questions" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="tmarks">TOTAL MARKS</label><br>
+                <input type="number" name="tmarks" id="tmarks" placeholder="Total test marks " class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="teach">EACH QUESTION MARKS</label><br>
+                <input type="number" name="teach" id="teach" placeholder="Each Questions marks" class="form-control">
+            </div>
+            <br>
+            <div style="text-align:center">
+                <input type="submit" name="submit" id="submit" class="button1" onclick="addtest()">
             </div>
             
 		</form>
@@ -100,6 +117,45 @@ session_start();
         }
     });
 }
+
+function addtest() {
+    var test = document.getElementById('test').value;
+    // var class1 = document.getElementById('classs').value;
+    var date1 = document.getElementById('date').value;
+    var hour = document.getElementById('thour').value;
+    var question = document.getElementById('tques').value;
+    var marks = document.getElementById('tmarks').value;
+    var each = document.getElementById('teach').value;
+    var token = "<?php echo password_hash("testtoken", PASSWORD_DEFAULT);?>"
+    if (test !== "" ) { //&& class1 != ""
+        $.ajax({
+            type: 'POST',
+            url: "ajax/addtest.php",
+            data: {
+                test: test,
+                // class1: class1,
+                date1:date1,
+                hour:hour,
+                question:question,
+                marks:marks,
+                each:each,
+                token: token
+            },
+            success: function(data) {
+                alert(data);
+                if (data == 0) {
+                    alert('TEST ADDED');
+                    window.location = "addtest.php";
+                } else {
+                    alert(data);
+                }
+            }
+        });
+    } else {
+        alert('please fill all details');
+    }
+}
+showtable();
 function showtable() {
     var token = "<?php echo password_hash("gettest", PASSWORD_DEFAULT);?>";
     $.ajax({
@@ -109,6 +165,7 @@ function showtable() {
             token: token
         },
         success: function(data) {
+            // alert (data);
             $('#listclass').html(data);
         }
     });

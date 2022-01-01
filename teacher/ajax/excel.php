@@ -1,9 +1,10 @@
 <?php
+session_start();
 include("Classes/PHPExcel.php");
 include("connection.php");
 
-//$class = $_POST['classs'];
 
+$class=$_SESSION['class'];
 if(!empty($_FILES["excel_file"]))
 {
 	$file_array = explode(".", $_FILES["excel_file"]["name"]);
@@ -23,8 +24,8 @@ if(!empty($_FILES["excel_file"]))
 				$email = $worksheet->getCellByColumnAndRow(2,$row)->getValue();
 				$stuid = $worksheet->getCellByColumnAndRow(3,$row)->getValue();
 				$password1 =password_hash(substr($fname,0,5)."9876", PASSWORD_DEFAULT);
-				$query = $db->prepare('INSERT INTO addstudent(fname,lname,email,stuid,password) VALUES (?,?,?,?,?)');
-				$data = array($fname,$lname,$email,$stuid,$password1);
+				$query = $db->prepare('INSERT INTO addstudent(fname,lname,email,stuid,password,class) VALUES (?,?,?,?,?,?)');
+				$data = array($fname,$lname,$email,$stuid,$password1,$class);
 				$execute=$query->execute($data);
 				if($execute){
 					echo 0;

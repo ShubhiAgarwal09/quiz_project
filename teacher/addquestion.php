@@ -43,7 +43,7 @@ if(!isset($_SESSION['id'])){
                     </li>
                     <li><a href="dashboard.php" id ="button1">ADD STUDENT</a></li>
                     <li><a href="addtest.php" id = "button2">ADD TEST</a></li>
-                    <li><a href="addquestion.php" id = "button3">CREATE TEST</a></li>
+                    <li><a href="#" id = "button3">CREATE TEST</a></li>
                     
                     <li>
                         <button class="button5"><a href="logout.php">LOGOUT</a></button>
@@ -58,12 +58,18 @@ if(!isset($_SESSION['id'])){
                 <div class="col-sm-2"></div>
             <div class="col-sm-8">
             <form class="form1 " id="excelform">
+            <div class="form-group">
+                <label for="tclass">CHOOSE TEST</label><br>
+                <select name="test" id="test" class="form-control">
+                    <option value="0">SELECT TEST</option>
+                </select>
+            </div>
 			<div class="">
                 <label for="name">CHOOSE FILE</label><br>
-				<input type="file" name="excel_file" id="excel_file">
+				<input type="file" name="excel_file" id="excel_file" placeholder="Add questions here">
 			</div>
 			<div class="" style="text-align: center;">
-				<input type="submit" name="submit" id="submit" class="button1" onclick="sendfile();">
+				<input type="submit" name="submit" id="submit" class="button1" onclick="fileextract();">
 			</div>
 		</form>
         </div>
@@ -83,7 +89,7 @@ if(!isset($_SESSION['id'])){
 <script>
  
 
-    function sendfile()
+    function fileextract()
 		{
 			var excelform = document.getElementById('excelform');
 			var data = new FormData(excelform);
@@ -91,7 +97,7 @@ if(!isset($_SESSION['id'])){
 			$.ajax(
 			{
 				type:'POST',
-				url:"ajax/excel.php",
+				url:"ajax/addquestion.php",
 			    data:data,
 			    processData:false,
 				contentType:false,
@@ -101,6 +107,39 @@ if(!isset($_SESSION['id'])){
 				}
 			});
 		}
+gettest();
+        function gettest() {
+        
+        var token = "<?php echo password_hash("gettest", PASSWORD_DEFAULT); ?>"
+
+        $.ajax({
+            type: 'POST',
+            url: "ajax/gettest1.php",
+            data: {
+                
+                token: token
+            },
+            success: function(data) {
+               
+                $('#test').html(data);
+                // $('#list2').html(data);
+            }
+        });
+    }
+
+    // function showtable() {
+    //     var token = "<?php /*echo password_hash("gettest", PASSWORD_DEFAULT); */?>";
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: "ajax/gettest.php",
+    //         data: {
+    //             token: token
+    //         },
+    //         success: function(data) {
+    //             $('#listclass').html(data);
+    //         }
+    //     });
+    // }
 
 </script>
 <script type=text/javascript>
