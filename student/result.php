@@ -56,20 +56,7 @@ if(!isset($_SESSION['id'])){
             <div class="col-sm-12">
                 <div class="col-sm-2"></div>
             <div class="col-sm-8">
-            <form class="form1">
-                        <div class="form-group">
-                            <label for="uni">CHOOSE TEST</label><br>
-                            <select name="list4" id="list4" class="form-control">
-                                <option value="0">SELECT TEST NAME</option>
-                            </select>
-                            <!-- <div class="btn" style="text-align:center;">
-                                <button class="btn btn-success" onclick="takeTest();" >SUBMIT</button>
-                            </div> --><br>
-                            <div class="" style="text-align: center;">
-                                <input type="submit" name="submit" id="submit" class="button1" onclick="takeTest();">
-                            </div>
-                        </div>
-            </form>
+            <div id="getresult" class="form1"></div>
         </div>
         <div class="box-footer">
             <div class="tabledesign">
@@ -85,54 +72,22 @@ if(!isset($_SESSION['id'])){
     </div>
 </body>
 <script>
-    function takeTest() {
-        var test = document.getElementById('list4').value;
-        if (test !== "0") {
-        $.ajax({
-            type: 'POST',
-            url: "ajax/activetest.php",
-            data: {
-                activeTest: test
-            },
-            success: function(data) {
-                 alert(data);
-                if (data == 0) {
-                    alert("Starting Test");
-                    window.location = "testPage.php";
-                    preventBack();
-                } else {
-                    alert("No Exam Today");
-                    window.location.reload();
-                }
-            }
-        });
+  showresult();
+ function showresult() {
+    var token = "<?php echo password_hash("getresult", PASSWORD_DEFAULT);?>";
+    $.ajax({
+        type: 'POST',
+        url: "ajax/getresult.php",
+        data: {
+            token: token
+        },
+        success: function(data) {
+            $('#getresult').html(data);
         }
-        else{
-            alert("Please Choose Subject");
-        }
-    }
-    gettest();
-
-    function gettest() {
-        var token = "<?php echo password_hash("gettest", PASSWORD_DEFAULT); ?>";
-        $.ajax({
-            type: 'POST',
-            url: "ajax/gettest.php",
-            data: {
-                token: token
-            },
-            success: function(data) {
-                // alert(data)
-                $('#list4').html(data);
-            }
-        });
-    }
+    });
+}
 </script>
-<script type = "text/javascript" >  
-    function preventBack() { window.history.forward(); }  
-    setTimeout("preventBack()", 0);  
-    window.onunload = function () { null };  
-</script> 
+
 <script type=text/javascript>
     $('form').submit(function(e) {
         e.preventDefault();
